@@ -1,0 +1,33 @@
+{
+  "name": "cooking-recipes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Théo LAVAUX",
+  "license": "MIT",
+  "scripts": {
+    "serve": "live-server public/",
+    "build": "webpack",
+    "dev-server": "webpack-dev-server"
+  },
+  "dependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "css-loader": "^1.0.1",
+    "live-server": "^1.2.0",
+    "node-sass": "^4.10.0",
+    "normalize.css": "^8.0.1",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.25.1",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.1.2"
+  }
+}

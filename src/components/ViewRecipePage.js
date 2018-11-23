@@ -33,7 +33,7 @@ const ViewRecipePage = ({ recipe, dispatch, history }) => (
         history.push('/');
       }}
     >
-      Delete
+      Remove
     </button>
   </div>
 );

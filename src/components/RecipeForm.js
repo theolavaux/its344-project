@@ -104,7 +104,7 @@ class RecipeForm extends React.Component {
             <option value="€€€">€€€</option>
           </select>
 
-          <input type="submit" value="Add recipe" />
+          <input type="submit" value={this.props.recipe ? 'Edit' : 'Add'} />
         </form>
       </div>
     );

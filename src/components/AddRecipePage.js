@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import RecipeForm from './RecipeForm';
 import { addRecipe } from '../actions/recipes';
+import { Link } from 'react-router-dom';
 
 const AddRecipePage = (props) => (
   <div>
@@ -12,6 +13,7 @@ const AddRecipePage = (props) => (
         props.history.push('/');
       }}
     />
+    <Link to={'/'}>Back</Link>
   </div>
 );
 

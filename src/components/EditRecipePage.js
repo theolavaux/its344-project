@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const EditRecipePage = (props) => (
   <div>
+    <h1>Edit recipe</h1>
     <RecipeForm
       recipe={props.recipe}
       onSubmit={(recipe) => {

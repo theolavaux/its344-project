@@ -16,7 +16,9 @@ export default (recipes, { text, sortBy, startDate, endDate }) => {
       return startDateMatch && endDateMatch && textMatch;
     })
     .sort((a, b) => {
-      if (sortBy === 'date') {
+      if (sortBy === 'title') {
+        return a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1;
+      } else if (sortBy === 'date') {
         return a.createdAt < b.createdAt ? 1 : -1;
       } else if (sortBy === 'price') {
         return a.price < b.price ? -1 : 1;

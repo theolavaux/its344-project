@@ -5,7 +5,7 @@ export const addRecipe = ({
   title = '',
   ingredients = '',
   description = '',
-  price = 0,
+  price = '',
   createdAt = 0
 } = {}) => ({
   type: 'ADD_RECIPE',

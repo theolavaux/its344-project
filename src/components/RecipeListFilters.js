@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { DateRangePicker } from 'react-dates';
 import {
   setTextFilter,
+  sortByTitle,
   sortByPrice,
   sortByDate,
   setStartDate,
@@ -23,6 +24,16 @@ class RecipeListFilters extends React.Component {
     this.setState(() => ({ calendarFocused }));
   };
 
+  onFilterChange = (e) => {
+    if (e.target.value === 'title') {
+      this.props.dispatch(sortByTitle());
+    } else if (e.target.value === 'date') {
+      this.props.dispatch(sortByDate());
+    } else if (e.target.value === 'price') {
+      this.props.dispatch(sortByPrice());
+    }
+  };
+
   render() {
     return (
       <div>
@@ -35,14 +46,9 @@ class RecipeListFilters extends React.Component {
         />
         <select
           value={this.props.filters.sortBy}
-          onChange={(e) => {
-            if (e.target.value === 'date') {
-              this.props.dispatch(sortByDate());
-            } else if (e.target.value === 'price') {
-              this.props.dispatch(sortByPrice());
-            }
-          }}
+          onChange={this.onFilterChange}
         >
+          <option value="title">Title</option>
           <option value="date">Date</option>
           <option value="price">Price</option>
         </select>

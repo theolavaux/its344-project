@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import RecipeForm from './RecipeForm';
 import { editRecipe, removeRecipe } from '../actions/recipes';
 
-const EditRecipePage = (props) => {
+const EditRecipePage = ({ props }) => {
   return (
     <div>
       <RecipeForm

@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import { SingleDatePicker } from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { connect } from 'react-redux';
@@ -14,7 +13,7 @@ class RecipeForm extends React.Component {
       title: props.recipe ? props.recipe.title : '',
       ingredients: props.recipe ? props.recipe.ingredients : '',
       description: props.recipe ? props.recipe.description : '',
-      price: props.recipe ? (props.recipe.price / 100).toString() : '',
+      price: props.recipe ? props.recipe.price : '€',
       createdAt: props.recipe ? moment(props.recipe.createdAt) : moment(),
       calendarFocused: false,
       error: ''
@@ -38,15 +37,7 @@ class RecipeForm extends React.Component {
 
   onPriceChange = (e) => {
     const price = e.target.value;
-    if (!price || price.match(/^\d{1,}(\.\d{0,2})?$/)) {
-      this.setState(() => ({ price }));
-    }
-  };
-
-  onDateChange = (createdAt) => {
-    if (createdAt) {
-      this.setState(() => ({ createdAt }));
-    }
+    this.setState(() => ({ price }));
   };
 
   onFocusChange = ({ focused }) => {
@@ -78,7 +69,7 @@ class RecipeForm extends React.Component {
         title: this.state.title,
         ingredients: this.state.ingredients,
         description: this.state.description,
-        price: parseFloat(this.state.price, 10) * 100,
+        price: this.state.price,
         createdAt: this.state.createdAt.valueOf()
       });
     }
@@ -96,37 +87,24 @@ class RecipeForm extends React.Component {
             value={this.state.title}
             onChange={this.onTitleChange}
           />
-
           <input
             type="text"
             placeholder="Ingredients"
             value={this.state.ingredients}
             onChange={this.onIngredientsChange}
           />
-
           <textarea
-            placeholder="Add a description for your recipe"
+            placeholder="Add a description to your recipe"
             value={this.state.description}
             onChange={this.onDescriptionChange}
           />
+          <select value={this.state.price} onChange={this.onPriceChange}>
+            <option value="€">€</option>
+            <option value="€€">€€</option>
+            <option value="€€€">€€€</option>
+          </select>
 
-          <input
-            type="text"
-            placeholder="Price"
-            value={this.state.price}
-            onChange={this.onPriceChange}
-          />
-
-          <SingleDatePicker
-            date={this.state.createdAt}
-            onDateChange={this.onDateChange}
-            focused={this.state.calendarFocused}
-            onFocusChange={this.onFocusChange}
-            numberOfMonths={1}
-            isOutsideRange={() => false}
-            displayFormat={'DD/MM/YYYY'}
-          />
-          <button>Add recipe</button>
+          <input type="submit" value="Add recipe" />
         </form>
       </div>
     );

@@ -1,29 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RecipeForm from './RecipeForm';
-import { editRecipe, removeRecipe } from '../actions/recipes';
+import { editRecipe } from '../actions/recipes';
+import { Link } from 'react-router-dom';
 
-const EditRecipePage = ({ props }) => {
-  return (
-    <div>
-      <RecipeForm
-        recipe={props.recipe}
-        onSubmit={(recipe) => {
-          props.dispatch(editRecipe(props.recipe.id, recipe));
-          props.history.push('/');
-        }}
-      />
-      <button
-        onClick={() => {
-          props.dispatch(removeRecipe(props.recipe.id));
-          props.history.push('/');
-        }}
-      >
-        Remove
-      </button>
-    </div>
-  );
-};
+const EditRecipePage = (props) => (
+  <div>
+    <RecipeForm
+      recipe={props.recipe}
+      onSubmit={(recipe) => {
+        props.dispatch(editRecipe(props.recipe.id, recipe));
+        props.history.push('/');
+      }}
+    />
+
+    <Link to={`/view/${props.recipe.id}`}>Back</Link>
+  </div>
+);
 
 const mapStateToProps = (state, props) => {
   return {

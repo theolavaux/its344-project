@@ -1,12 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import AddRecipePage from '../components/AddRecipePage';
-import ViewRecipePage from '../components/ViewRecipePage';
-import EditRecipePage from '../components/EditRecipePage';
-import RecipeDashboardPage from '../components/RecipeDashboardPage';
 import Header from '../components/Header';
-import HelpPage from '../components/HelpPage';
+import AddRecipePage from '../components/AddRecipePage';
+import EditRecipePage from '../components/EditRecipePage';
 import NotFoundPage from '../components/NotFoundPage';
+import RecipeDashboardPage from '../components/RecipeDashboardPage';
+import ViewRecipePage from '../components/ViewRecipePage';
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -17,7 +16,6 @@ const AppRouter = () => (
         <Route path="/create" component={AddRecipePage} />
         <Route path="/view/:id" component={ViewRecipePage} />
         <Route path="/edit/:id" component={EditRecipePage} />
-        <Route path="/help" component={HelpPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

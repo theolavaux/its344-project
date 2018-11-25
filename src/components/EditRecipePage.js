@@ -4,20 +4,23 @@ import RecipeForm from './RecipeForm';
 import { editRecipe } from '../actions/recipes';
 import { Link } from 'react-router-dom';
 
-const EditRecipePage = (props) => (
-  <div>
-    <h1>Edit recipe</h1>
-    <RecipeForm
-      recipe={props.recipe}
-      onSubmit={(recipe) => {
-        props.dispatch(editRecipe(props.recipe.id, recipe));
-        props.history.push('/');
-      }}
-    />
+export class EditRecipePage extends React.Component {
+  onSubmit = (recipe) => {
+    this.props.editRecipe(this.props.recipe.id, recipe);
+    this.props.history.push('/');
+  };
 
-    <Link to={`/view/${props.recipe.id}`}>Back</Link>
-  </div>
-);
+  render() {
+    return (
+      <div>
+        <h1>Edit recipe</h1>
+        <RecipeForm recipe={this.props.recipe} onSubmit={this.onSubmit} />
+
+        <Link to={`/view/${this.props.recipe.id}`}>Back</Link>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state, props) => {
   return {
@@ -25,4 +28,11 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps)(EditRecipePage);
+const mapDispatchToProps = (dispatch) => ({
+  editRecipe: (id, recipe) => dispatch(editRecipe(id, recipe))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditRecipePage);

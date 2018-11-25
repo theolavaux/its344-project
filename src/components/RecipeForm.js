@@ -61,7 +61,7 @@ class RecipeForm extends React.Component {
       this.setState(() => ({
         error: 'Please fill all the fields'
       }));
-    } else if (this.checkDuplicateTitle()) {
+    } else if (this.checkDuplicateTitle() && !this.props.recipe) {
       this.setState(() => ({ error: 'This recipe title already exists' }));
     } else {
       this.setState(() => ({ error: '' }));

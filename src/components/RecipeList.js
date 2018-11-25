@@ -5,10 +5,13 @@ import selectRecipes from '../selectors/recipes';
 
 const RecipeList = (props) => (
   <div>
-    <h1>Recipes List</h1>
-    {props.recipes.map((recipe) => {
-      return <RecipeListItem key={recipe.id} {...recipe} />;
-    })}
+    {props.recipes.length === 0 ? (
+      <p>No recipes</p>
+    ) : (
+      props.recipes.map((recipe) => {
+        return <RecipeListItem key={recipe.id} {...recipe} />;
+      })
+    )}
   </div>
 );
 

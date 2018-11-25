@@ -16,8 +16,8 @@ class RecipeListFilters extends React.Component {
   };
 
   onDatesChange = ({ startDate, endDate }) => {
-    this.props.dispatch(setStartDate(startDate));
-    this.props.dispatch(setEndDate(endDate));
+    this.props.setStartDate(startDate);
+    this.props.setEndDate(endDate);
   };
 
   onFocusChange = (calendarFocused) => {
@@ -26,11 +26,11 @@ class RecipeListFilters extends React.Component {
 
   onFilterChange = (e) => {
     if (e.target.value === 'title') {
-      this.props.dispatch(sortByTitle());
+      this.props.sortByTitle();
     } else if (e.target.value === 'date') {
-      this.props.dispatch(sortByDate());
+      this.props.sortByDate();
     } else if (e.target.value === 'price') {
-      this.props.dispatch(sortByPrice());
+      this.props.sortByPrice();
     }
   };
 
@@ -41,7 +41,7 @@ class RecipeListFilters extends React.Component {
           type="text"
           value={this.props.filters.text}
           onChange={(e) => {
-            this.props.dispatch(setTextFilter(e.target.value));
+            this.props.setTextFilter(e.target.value);
           }}
         />
         <select
@@ -77,4 +77,16 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(RecipeListFilters);
+const mapDispatchToProps = (dispatch) => ({
+  setTextFilter: (text) => dispatch(setTextFilter(text)),
+  sortByTitle: () => dispatch(sortByTitle()),
+  sortByPrice: () => dispatch(sortByPrice()),
+  sortByDate: () => dispatch(sortByDate()),
+  setStartDate: (startDate) => dispatch(setStartDate(startDate)),
+  setEndDate: (endDate) => dispatch(setEndDate(endDate))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RecipeListFilters);

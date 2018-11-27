@@ -4,6 +4,7 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { connect } from 'react-redux';
 import selectRecipes from '../selectors/recipes';
+import { Link } from 'react-router-dom';
 
 class RecipeForm extends React.Component {
   constructor(props) {
@@ -77,10 +78,21 @@ class RecipeForm extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.error && <p>{this.state.error}</p>}
-        <form onSubmit={this.onSubmit}>
+      <div className="content-container">
+        <Link
+          className="button button--margin--bottom"
+          to={this.props.recipe ? `/view/${this.props.recipe.id}` : '/'}
+        >
+          {'<'} Back
+        </Link>
+
+        <form className="form" onSubmit={this.onSubmit}>
+          {this.state.error && (
+            <p className="form__error">{this.state.error}</p>
+          )}
+
           <input
+            className="text-input"
             type="text"
             placeholder="Title"
             autoFocus
@@ -88,23 +100,33 @@ class RecipeForm extends React.Component {
             onChange={this.onTitleChange}
           />
           <input
+            className="text-input"
             type="text"
             placeholder="Ingredients"
             value={this.state.ingredients}
             onChange={this.onIngredientsChange}
           />
           <textarea
+            className="textarea"
             placeholder="Add a description to your recipe"
             value={this.state.description}
             onChange={this.onDescriptionChange}
           />
-          <select value={this.state.price} onChange={this.onPriceChange}>
+          <select
+            className="select"
+            value={this.state.price}
+            onChange={this.onPriceChange}
+          >
             <option value="€">€</option>
             <option value="€€">€€</option>
             <option value="€€€">€€€</option>
           </select>
 
-          <input type="submit" value={this.props.recipe ? 'Edit' : 'Add'} />
+          <div>
+            <button className="button" type="submit">
+              {this.props.recipe ? 'Edit' : 'Add'}
+            </button>
+          </div>
         </form>
       </div>
     );

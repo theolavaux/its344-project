@@ -1,28 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RecipeForm from './RecipeForm';
-import { addRecipe } from '../actions/recipes';
-import { Link } from 'react-router-dom';
+import { startAddRecipe } from '../actions/recipes';
 
 export class AddRecipePage extends React.Component {
   onSubmit = (recipe) => {
-    this.props.addRecipe(recipe);
+    this.props.startAddRecipe(recipe);
     this.props.history.push('/');
   };
 
   render() {
     return (
       <div>
-        <h1>Add recipe</h1>
-        <RecipeForm onSubmit={this.onSubmit} />
-        <Link to="/">Back</Link>
+        <div className="page-header">
+          <div className="content-container">
+            <h1 className="page-header__title">Add recipe</h1>
+          </div>
+        </div>
+        <div className="content-container">
+          <RecipeForm onSubmit={this.onSubmit} />
+        </div>
       </div>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addRecipe: (recipe) => dispatch(addRecipe(recipe))
+  startAddRecipe: (recipe) => dispatch(startAddRecipe(recipe))
 });
 
 export default connect(

@@ -4,14 +4,19 @@ import RecipeListItem from './RecipeListItem';
 import selectRecipes from '../selectors/recipes';
 
 const RecipeList = (props) => (
-  <div>
-    {props.recipes.length === 0 ? (
-      <p>No recipes</p>
-    ) : (
-      props.recipes.map((recipe) => {
-        return <RecipeListItem key={recipe.id} {...recipe} />;
-      })
-    )}
+  <div className="content-container">
+    <div className="list-header">Recipes</div>
+    <div className="list-body">
+      {props.recipes.length === 0 ? (
+        <div className="list-item list-item--message">
+          <span>No recipes</span>
+        </div>
+      ) : (
+        props.recipes.map((recipe) => {
+          return <RecipeListItem key={recipe.id} {...recipe} />;
+        })
+      )}
+    </div>
   </div>
 );
 

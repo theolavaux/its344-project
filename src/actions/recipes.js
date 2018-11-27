@@ -1,29 +1,9 @@
-import uuid from 'uuid';
-//import database from '../firebase/firebase';
+import * as axios from 'axios';
 
-// ADD_RECIPE
-export const addRecipe = ({
-  title = '',
-  ingredients = '',
-  description = '',
-  price = 0,
-  createdAt = 0
-} = {}) => ({
+export const addRecipe = (recipe) => ({
   type: 'ADD_RECIPE',
-  recipe: {
-    id: uuid(),
-    title,
-    ingredients,
-    description,
-    price,
-    createdAt
-  }
+  recipe
 });
-
-// export const addRecipe = (recipe) => ({
-//   type: 'ADD_RECIPE',
-//   recipe
-// });
 
 // START_ADD_RECIPE
 export const startAddRecipe = (recipeData = {}) => {
@@ -35,17 +15,22 @@ export const startAddRecipe = (recipeData = {}) => {
       price = '',
       createdAt = 0
     } = recipeData;
-    const recipe = { title, ingredients, description, price, createdAt };
-    return database
-      .ref(`recipes`)
-      .push(recipe)
-      .then((ref) => {
-        dispatch(
-          addRecipe({
-            id: ref.key,
-            ...expense
-          })
-        );
+    const recipe = {
+      title,
+      ingredients,
+      description,
+      price,
+      createdAt
+    };
+
+    return axios
+      .post('https://mighty-fortress-77606.herokuapp.com/addRecipe', recipe)
+      .then((response) => {
+        const new_recipe = { ...recipe, id: response.data };
+        dispatch(addRecipe(new_recipe));
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 };
@@ -59,18 +44,27 @@ export const setRecipes = (recipes) => ({
 // START_SET_RECIPES
 export const startSetRecipes = () => {
   return (dispatch) => {
-    return database
-      .ref(`recipes`)
-      .once('value')
-      .then((snapshot) => {
+    return axios
+      .get('https://mighty-fortress-77606.herokuapp.com/recipes')
+      .then((response) => {
         const recipes = [];
-        snapshot.forEach((childSnapshot) => {
-          recipes.push({
-            id: childSnapshot.key,
-            ...childSnapshot.val()
-          });
-        });
+        response.data.forEach(
+          ({ _id, title, ingredients, description, price, createdAt }) => {
+            const new_recipe = {
+              id: _id,
+              title,
+              ingredients,
+              description,
+              price,
+              createdAt
+            };
+            recipes.push(new_recipe);
+          }
+        );
         dispatch(setRecipes(recipes));
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 };
@@ -85,11 +79,15 @@ export const editRecipe = (id, updates) => ({
 // START_EDIT_RECIPE
 export const startEditRecipe = (id, updates) => {
   return (dispatch) => {
-    return database
-      .ref(`recipes/${id}`)
-      .update(updates)
+    return axios
+      .post(
+        `https://mighty-fortress-77606.herokuapp.com/updateRecipe/${id}?_method=PUT`
+      )
       .then(() => {
-        dispatch(editRecipe(id, updates));
+        dispatch(editRecipe(updates));
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 };
@@ -103,11 +101,15 @@ export const removeRecipe = (id) => ({
 // START_REMOVE_EXPENSE
 export const startRemoveRecipe = (id) => {
   return (dispatch) => {
-    return database
-      .ref(`recipes/${id}`)
-      .remove()
+    return axios
+      .post(
+        `https://mighty-fortress-77606.herokuapp.com/deleteRecipe/${id}?_method=DELETE`
+      )
       .then(() => {
         dispatch(removeRecipe(id));
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 };

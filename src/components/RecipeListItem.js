@@ -3,21 +3,19 @@ import { Link } from 'react-router-dom';
 
 const RecipeListItem = ({ id, title, ingredients, price }) => {
   return (
-    <div>
-      <h3>
-        <Link to={`/view/${id}`}>{title}</Link>
-      </h3>
+    <Link className="list-item-hoverable" to={`/view/${id}`}>
+      <h3 className="list-item__title">{title}</h3>
 
       <div>
-        <h4>Ingredients</h4>
-        <p>{ingredients}</p>
+        <h4 className="list-item__title">Ingredients</h4>
+        <p className="list-item__subtitle">{ingredients}</p>
       </div>
 
       <div>
-        <h4>Price</h4>
-        <p>{price}</p>
+        <h4 className="list-item__title">Price</h4>
+        <p className="list-item__subtitle">{price}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

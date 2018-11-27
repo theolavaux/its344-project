@@ -2,39 +2,52 @@ import React from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { removeRecipe } from '../actions/recipes';
+import { startRemoveRecipe } from '../actions/recipes';
 
 const ViewRecipePage = ({ recipe, dispatch, history }) => (
-  <div>
-    <h1>{recipe.title}</h1>
-
-    <div>
-      <h3>Ingredients</h3>
-      <p>{recipe.ingredients}</p>
-    </div>
-    <div>
-      <h3>Description</h3>
-      <p>{recipe.description}</p>
-    </div>
-    <div>
-      <h3>Price</h3>
-      <p>{recipe.price}</p>
-    </div>
-    <div>
-      <h3>Created at</h3>
-      <p>{moment(recipe.createdAt).format('DD/MM/YYYY')}</p>
-    </div>
-
-    <Link to={`/edit/${recipe.id}`}>Edit recipe</Link>
-
-    <button
-      onClick={() => {
-        dispatch(removeRecipe(recipe.id));
-        history.push('/');
-      }}
+  <div className="content-container">
+    <Link
+      className="button button--margin--top button--margin--bottom"
+      to={'/'}
     >
-      Remove
-    </button>
+      {'<'} Back
+    </Link>
+
+    <div className="list-header-large">{recipe.title}</div>
+
+    <div className="list-body">
+      <div className="list-item-row">
+        <h3 className="list-item__title">Ingredients</h3>
+        <span className="list-item__text">{recipe.ingredients}</span>
+
+        <h3 className="list-item__title">Description</h3>
+        <span className="list-item__text">{recipe.description}</span>
+
+        <h3 className="list-item__title">Price</h3>
+        <span className="list-item__text">{recipe.price}</span>
+
+        <h3 className="list-item__title">Created at</h3>
+        <span className="list-item__text">
+          {moment(recipe.createdAt).format('DD/MM/YYYY')}
+        </span>
+      </div>
+    </div>
+
+    <div className="buttons-side-by-side">
+      <Link className="button" to={`/edit/${recipe.id}`}>
+        Edit recipe
+      </Link>
+
+      <button
+        className="button button--secondary"
+        onClick={() => {
+          dispatch(startRemoveRecipe(recipe.id));
+          history.push('/');
+        }}
+      >
+        Remove
+      </button>
+    </div>
   </div>
 );
 

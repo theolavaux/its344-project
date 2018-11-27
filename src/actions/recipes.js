@@ -81,10 +81,11 @@ export const startEditRecipe = (id, updates) => {
   return (dispatch) => {
     return axios
       .post(
-        `https://mighty-fortress-77606.herokuapp.com/updateRecipe/${id}?_method=PUT`
+        `https://mighty-fortress-77606.herokuapp.com/updateRecipe/${id}?_method=PUT`,
+        updates
       )
       .then(() => {
-        dispatch(editRecipe(updates));
+        dispatch(editRecipe(id, updates));
       })
       .catch((error) => {
         console.log(error);

@@ -15,6 +15,7 @@ class RecipeForm extends React.Component {
       ingredients: props.recipe ? props.recipe.ingredients : '',
       description: props.recipe ? props.recipe.description : '',
       price: props.recipe ? props.recipe.price : '€',
+      image: props.recipe ? props.recipe.price : '',
       createdAt: props.recipe ? moment(props.recipe.createdAt) : moment(),
       calendarFocused: false,
       error: ''
@@ -39,6 +40,11 @@ class RecipeForm extends React.Component {
   onPriceChange = (e) => {
     const price = e.target.value;
     this.setState(() => ({ price }));
+  };
+
+  onImageChange = (e) => {
+    const image = e.target.value;
+    this.setState(() => ({ image }));
   };
 
   onFocusChange = ({ focused }) => {
@@ -71,6 +77,7 @@ class RecipeForm extends React.Component {
         ingredients: this.state.ingredients,
         description: this.state.description,
         price: this.state.price,
+        image: this.state.image,
         createdAt: this.state.createdAt.valueOf()
       });
     }
@@ -105,6 +112,13 @@ class RecipeForm extends React.Component {
             placeholder="Ingredients"
             value={this.state.ingredients}
             onChange={this.onIngredientsChange}
+          />
+          <input
+            className="text-input"
+            type="text"
+            placeholder="Image"
+            value={this.state.image}
+            onChange={this.onImageChange}
           />
           <textarea
             className="textarea"

@@ -13,7 +13,10 @@ const ViewRecipePage = ({ recipe, dispatch, history }) => (
       {'<'} Back
     </Link>
 
-    <div className="list-header-large">{recipe.title}</div>
+    <div className="list-header-large">
+      {recipe.title}
+      <img src={recipe.image} height="180" width="180" />
+    </div>
 
     <div className="list-body">
       <div className="list-item-row">

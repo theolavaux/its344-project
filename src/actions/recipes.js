@@ -13,6 +13,7 @@ export const startAddRecipe = (recipeData = {}) => {
       description = '',
       ingredients = '',
       price = '',
+      image = '',
       createdAt = 0
     } = recipeData;
     const recipe = {
@@ -20,6 +21,7 @@ export const startAddRecipe = (recipeData = {}) => {
       ingredients,
       description,
       price,
+      image,
       createdAt
     };
 
@@ -49,13 +51,22 @@ export const startSetRecipes = () => {
       .then((response) => {
         const recipes = [];
         response.data.forEach(
-          ({ _id, title, ingredients, description, price, createdAt }) => {
+          ({
+            _id,
+            title,
+            ingredients,
+            description,
+            price,
+            image,
+            createdAt
+          }) => {
             const new_recipe = {
               id: _id,
               title,
               ingredients,
               description,
               price,
+              image,
               createdAt
             };
             recipes.push(new_recipe);

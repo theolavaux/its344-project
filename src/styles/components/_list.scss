@@ -1,0 +1,84 @@
+.list-header {
+  background: $off-white;
+  border: 1px solid darken($off-white, 7%);
+  display: flex;
+  justify-content: space-between;
+  padding: $s-size $m-size;
+  font-weight: 700;
+}
+
+.list-header-large {
+  @extend .list-header;
+  font-size: 2.2rem;
+}
+
+.list-body {
+  margin-bottom: $m-size;
+  @media (min-width: $desktop-breakpoint) {
+    margin-bottom: $l-size;
+  }
+}
+
+.list-item {
+  border: 1px solid darken($off-white, 7%);
+  border-top: none;
+  color: $dark-grey;
+  display: flex;
+  flex-direction: column;
+  padding: $s-size;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  @media (min-width: $desktop-breakpoint) {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: $m-size;
+  }
+}
+
+.list-item-row {
+  @extend .list-item;
+  @media (min-width: $desktop-breakpoint) {
+    flex-direction: column;
+  }
+  span {
+    margin-left: $m-size;
+    margin-bottom: 8rem;
+  }
+}
+
+.list-item-hoverable {
+  @extend .list-item;
+  &:hover {
+    background: $off-white;
+  }
+}
+
+.list-item__title {
+  margin: 0;
+  word-break: break-all;
+}
+
+.list-item__title {
+  margin: 0;
+  word-break: break-all;
+}
+
+.list-item__text {
+  color: $grey;
+  font-size: 1.5rem;
+}
+
+.list-item__subtitle {
+  color: $grey;
+  font-size: $font-size-small;
+}
+
+.list-item--message {
+  align-items: center;
+  justify-content: center;
+  color: $grey;
+  padding: $m-size;
+  &:hover {
+    background: none;
+  }
+}
